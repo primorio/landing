@@ -4,6 +4,7 @@ import Link from "next/link"
 import NavBar from "@/components/ui/NavBar"
 import Footer from "@/components/ui/Footer"
 import { Metadata } from "next";
+import PageViewTracker from "@/components/tracking/PageViewTracker";
 
 export const metadata: Metadata = {
     title: "Primorio - Innovative Lösungen für die Immobilienwirtschaft",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
     return (
         <div className="min-h-screen bg-white flex flex-col">
+            <PageViewTracker pageName="Home" />
             <NavBar />
             <main className="flex-1 flex flex-col">
                 {/* Hero Section */}

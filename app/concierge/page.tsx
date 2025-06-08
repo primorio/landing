@@ -36,6 +36,8 @@ import { Metadata } from "next";
 import DemoSticky from "./_DemoSticky"
 import ContactForm from "./_ContactForm"
 import ScrollToButton from "./_ScrollToButton"
+import PageViewTracker from "@/components/tracking/PageViewTracker";
+import DemoPhoneTracker from "@/components/tracking/DemoPhoneTracker";
 
 export const metadata: Metadata = {
     title: "Primorio - KI-Concierge",
@@ -47,6 +49,7 @@ export default function ConciergePage() {
 
     return (
         <div className="min-h-screen bg-white flex flex-col">
+            <PageViewTracker pageName="Concierge" />
             <NavBar
                 logo={
                     <Link href="/" className="flex flex-col items-start space-y-0">
@@ -108,7 +111,13 @@ export default function ConciergePage() {
                                         LIVE DEMO - Jetzt kostenlos testen
                                     </div>
                                     <div>
-                                        <Link href={`tel:${demoNumber}`} className="text-6xl lg:text-8xl font-bold text-gray-900 mb-3 tracking-tight hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-teal-600 hover:to-orange-600">{demoNumber}</Link>
+                                        <DemoPhoneTracker
+                                            phoneNumber={demoNumber}
+                                            source="hero_main"
+                                            className="text-6xl lg:text-8xl font-bold text-gray-900 mb-3 tracking-tight hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-teal-600 hover:to-orange-600"
+                                        >
+                                            {demoNumber}
+                                        </DemoPhoneTracker>
                                     </div>
                                     <p className="text-lg text-gray-600 mb-6">
                                         Rufen Sie an und erleben Sie unseren KI-Concierge live in Aktion
@@ -353,7 +362,10 @@ export default function ConciergePage() {
                                         Rufen Sie unseren KI-Concierge an und testen Sie die Gesprächsqualität live.
                                     </p>
                                     <div className="text-3xl font-bold text-gray-900 mb-4">{demoNumber}</div>
-                                    <Link href={`tel:${demoNumber}`}>
+                                    <DemoPhoneTracker
+                                        phoneNumber={demoNumber}
+                                        source="solution_section"
+                                    >
                                         <Button
                                             size="lg"
                                             className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold transition-all duration-300 hover:scale-105"
@@ -361,7 +373,7 @@ export default function ConciergePage() {
                                             <Phone className="w-5 h-5 mr-2" />
                                             Demo-Anruf starten
                                         </Button>
-                                    </Link>
+                                    </DemoPhoneTracker>
                                 </div>
                             </div>
                         </div>
@@ -750,7 +762,7 @@ export default function ConciergePage() {
                                     <h3 className="text-2xl font-bold mb-4">Live Demo</h3>
                                     <p className="text-white/80 mb-6">Überzeugen Sie sich selbst von der Qualität</p>
                                     <p className="text-3xl font-bold mb-4">{demoNumber}</p>
-                                    <Link href={`tel:${demoNumber}`}>
+                                    <DemoPhoneTracker source="final_cta" phoneNumber={demoNumber}>
                                         <Button
                                             size="lg"
                                             className="w-full bg-white text-teal-700 hover:bg-gray-100 font-bold transition-all duration-300 hover:scale-105"
@@ -758,7 +770,7 @@ export default function ConciergePage() {
                                             <Phone className="w-5 h-5 mr-2" />
                                             Jetzt Demo anrufen
                                         </Button>
-                                    </Link>
+                                    </DemoPhoneTracker>
                                 </div>
 
                                 {/* Contact CTA */}

@@ -5,8 +5,10 @@ import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import PocketBase from "pocketbase"
+import { useMetaPixelTracking } from '@/lib/meta-pixel'
 
 export default function ContactForm() {
+    const { trackConciergeFormLead } = useMetaPixelTracking()
     const [form, setForm] = useState({
         firma: "",
         ansprechpartner: "",
@@ -35,6 +37,14 @@ export default function ContactForm() {
                 telefon: form.telefon,
                 anzahl_einheiten: form.anzahl_einheiten,
             })
+
+            // Track successful form submission with Meta Pixel
+            trackConciergeFormLead({
+                email: form.email,
+                leadType: 'concierge_form',
+                timestamp: new Date().toISOString()
+            })
+
             setSuccess(true)
         } catch (err: any) {
             setError("Fehler beim Senden. Bitte versuchen Sie es erneut.")

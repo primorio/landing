@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Phone, Target } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
+import DemoPhoneTracker from "@/components/tracking/DemoPhoneTracker"
 
 interface DemoStickyProps {
     demoNumber: string
@@ -38,7 +38,10 @@ export default function DemoSticky({ demoNumber }: DemoStickyProps) {
                             <p className="text-xs text-gray-600 font-medium">Live Demo</p>
                         </div>
                         <p className="text-lg font-bold text-gray-900 mb-2">{demoNumber}</p>
-                        <Link href={`tel:${demoNumber}`}>
+                        <DemoPhoneTracker
+                            phoneNumber={demoNumber}
+                            source="sticky_demo"
+                        >
                             <Button
                                 size="sm"
                                 className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold w-full transition-all duration-300"
@@ -46,7 +49,7 @@ export default function DemoSticky({ demoNumber }: DemoStickyProps) {
                                 <Phone className="w-4 h-4 mr-1" />
                                 Anrufen
                             </Button>
-                        </Link>
+                        </DemoPhoneTracker>
                     </div>
                 </CardContent>
             </Card>

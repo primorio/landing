@@ -5,10 +5,12 @@ import { CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import PocketBase from "pocketbase"
+import { useMetaPixelTracking } from '@/lib/meta-pixel'
 
 const pb = new PocketBase("https://primoriomarketplace.pockethost.io")
 
 export default function ContactForm() {
+    const { trackContactFormLead } = useMetaPixelTracking()
     const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" })
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -29,6 +31,14 @@ export default function ContactForm() {
                 telefon: form.phone,
                 nachricht: form.message,
             })
+
+            // Track successful form submission with Meta Pixel
+            trackContactFormLead({
+                email: form.email,
+                leadType: 'contact_form',
+                timestamp: new Date().toISOString()
+            })
+
             setSuccess(true)
         } catch (err: any) {
             setError("Fehler beim Senden. Bitte versuchen Sie es erneut.")
