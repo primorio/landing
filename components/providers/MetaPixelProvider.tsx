@@ -44,7 +44,7 @@ export default function MetaPixelProvider({ children }: { children: ReactNode })
                     .init(META_PIXEL_CONFIG.pixelId)
                     .pageView()
 
-                setFbq((metaPixelFbq: FacebookQuery | null) => {
+                setFbq(() => {
                     return metaPixelFbq
                 })
                 setIsLoaded(true)
