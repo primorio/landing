@@ -107,7 +107,9 @@ export default function ConciergePage() {
                                         <Target className="w-4 h-4 mr-2" />
                                         LIVE DEMO - Jetzt kostenlos testen
                                     </div>
-                                    <div className="text-6xl lg:text-8xl font-bold text-gray-900 mb-3 tracking-tight">{demoNumber}</div>
+                                    <div>
+                                        <Link href={`tel:${demoNumber}`} className="text-6xl lg:text-8xl font-bold text-gray-900 mb-3 tracking-tight hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-teal-600 hover:to-orange-600">{demoNumber}</Link>
+                                    </div>
                                     <p className="text-lg text-gray-600 mb-6">
                                         Rufen Sie an und erleben Sie unseren KI-Concierge live in Aktion
                                     </p>
@@ -145,9 +147,14 @@ export default function ConciergePage() {
 
                 {/* Transition Arrow */}
                 <div className="flex justify-center -mt-6 relative z-10">
-                    <div className="bg-white rounded-full p-3 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                        <ArrowDown className="w-6 h-6 text-gray-400" />
-                    </div>
+                    <ScrollToButton
+                        targetId="problem-section"
+                        variant="ghost"
+                        size="icon"
+                        className="bg-white rounded-full p-3 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300 hover:bg-gray-50 scale-150"
+                    >
+                        <ArrowDown className="w-8 h-8 text-gray-400" />
+                    </ScrollToButton>
                 </div>
 
                 {/* Problem Section - Narrative Start */}
@@ -232,16 +239,21 @@ export default function ConciergePage() {
                     <div className="relative py-6">
                         <div className="container mx-auto px-4">
                             <div className="flex justify-center">
-                                <div className="bg-white rounded-full p-4 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300">
+                                <ScrollToButton
+                                    targetId="solution-section"
+                                    variant="ghost"
+                                    size="icon"
+                                    className="bg-white rounded-full p-4 shadow-lg border border-green-200 hover:shadow-xl transition-all duration-300 hover:bg-gray-50 scale-150"
+                                >
                                     <ArrowDown className="w-8 h-8 text-green-600" />
-                                </div>
+                                </ScrollToButton>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Solution Flow - The Answer */}
-                <section className="py-16 bg-green-50">
+                <section id="solution-section" className="py-16 bg-green-50">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center mb-16">
@@ -360,15 +372,20 @@ export default function ConciergePage() {
                 <div className="bg-gradient-to-b from-green-50 to-blue-50 py-6">
                     <div className="container mx-auto px-4">
                         <div className="flex justify-center">
-                            <div className="bg-white rounded-full p-4 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300">
+                            <ScrollToButton
+                                targetId="benefits-section"
+                                variant="ghost"
+                                size="icon"
+                                className="bg-white rounded-full p-4 shadow-lg border border-blue-200 hover:shadow-xl transition-all duration-300 hover:bg-gray-50 scale-150"
+                            >
                                 <ArrowDown className="w-8 h-8 text-blue-600" />
-                            </div>
+                            </ScrollToButton>
                         </div>
                     </div>
                 </div>
 
                 {/* Benefits - The Results */}
-                <section className="py-16 bg-blue-50">
+                <section id="benefits-section" className="py-16 bg-blue-50">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center mb-16">
@@ -462,7 +479,7 @@ export default function ConciergePage() {
                 </section>
 
                 {/* Example Conversation Section - Hard Edge */}
-                <section className="py-20 bg-white">
+                <section id="example-conversation" className="py-20 bg-white">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center mb-16">
@@ -779,7 +796,7 @@ export default function ConciergePage() {
 
 
                 {/* Use Cases - Consistent Icons */}
-                <section className="py-20 bg-white">
+                <section id="use-cases" className="py-20 bg-white">
                     <div className="container mx-auto px-4">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center mb-16">
@@ -845,7 +862,7 @@ export default function ConciergePage() {
                 </section>
 
                 {/* Trust & Contact */}
-                <section className="py-20 bg-gray-50">
+                <section id="contact-form" className="py-20 bg-gray-50">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <div className="grid lg:grid-cols-2 gap-12 items-center">
