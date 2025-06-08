@@ -140,7 +140,7 @@ export default function ConciergePage() {
                                 <div className="flex items-center justify-center text-gray-500 text-sm mb-8">
                                     <AlertTriangle className="w-4 h-4 mr-2" />
                                     <span>
-                                        Tipp: Melden Sie eine fiktive kaputte
+                                        Tipp: Melden Sie eine fiktive, kaputte
                                         Heizung
                                     </span>
                                 </div>
