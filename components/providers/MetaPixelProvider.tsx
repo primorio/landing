@@ -2,7 +2,12 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { addScriptDefault, setup, FacebookQuery } from 'meta-pixel'
-import { META_PIXEL_CONFIG } from '@/lib/meta-pixel'
+
+
+// Meta Pixel Configuration
+export const META_PIXEL_CONFIG = {
+    pixelId: "571310355662922", // Replace with actual Meta Pixel ID
+}
 
 // Create the context
 interface MetaPixelContextType {
@@ -39,7 +44,9 @@ export default function MetaPixelProvider({ children }: { children: ReactNode })
                     .init(META_PIXEL_CONFIG.pixelId)
                     .pageView()
 
-                setFbq(metaPixelFbq)
+                setFbq((metaPixelFbq: FacebookQuery | null) => {
+                    return metaPixelFbq
+                })
                 setIsLoaded(true)
             } catch (error) {
                 console.error('Failed to initialize Meta Pixel:', error)

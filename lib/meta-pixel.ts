@@ -1,10 +1,5 @@
 import { useMetaPixel } from '@/components/providers/MetaPixelProvider'
 
-// Meta Pixel Configuration
-export const META_PIXEL_CONFIG = {
-    pixelId: "571310355662922", // Replace with actual Meta Pixel ID
-}
-
 // Event names for tracking
 export const META_PIXEL_EVENTS = {
     PAGE_VIEW: "PrimorioPageView",
