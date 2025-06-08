@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function ConciergePage() {
-    const demoNumber = "+49 30 12345678"
+    const demoNumber = "+49 30 52014530"
 
     return (
         <div className="min-h-screen bg-white flex flex-col">
@@ -654,7 +654,7 @@ export default function ConciergePage() {
                                         Resultierende E-Mail
                                     </h3>
 
-                                    <Card className="border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
+                                    <Card className="border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-0">
                                         <CardContent className="p-0">
                                             {/* Email Header */}
                                             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-t-lg">
@@ -668,7 +668,7 @@ export default function ConciergePage() {
                                             </div>
 
                                             {/* Email Content */}
-                                            <div className="p-6 bg-white">
+                                            <div className="p-6 bg-white rounded-b-lg">
                                                 <div className="space-y-4">
                                                     <div className="border-b border-gray-100 pb-3">
                                                         <p className="text-sm text-gray-600">Von: concierge@primorio.de</p>

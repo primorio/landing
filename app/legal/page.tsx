@@ -25,7 +25,7 @@ export default function ImpressumPage() {
                             <p className="mb-6">Lennard Walter, Timon Gärtner</p>
                             <h3 className="text-xl font-semibold text-gray-900 mb-3">Kontakt:</h3>
                             <div className="mb-6">
-                                <p className="mb-2">Telefon: +49 30 52014530</p>
+                                <p className="mb-2">Telefon: +49 30 52014903</p>
                                 <p className="mb-2">E-Mail: kontakt@primorio.de</p>
                             </div>
                             <h3 className="text-xl font-semibold text-gray-900 mb-3">Registereintrag:</h3>

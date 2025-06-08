@@ -54,7 +54,7 @@ export default function ContactForm() {
                 <p className="mb-2 text-gray-700">Sie erreichen uns auch direkt unter:</p>
                 <div className="mb-6">
                     <div className="text-teal-700 font-semibold">info@primorio.de</div>
-                    <div className="text-teal-700 font-semibold">+49 30 12345678</div>
+                    <div className="text-teal-700 font-semibold">+49 30 52014903</div>
                 </div>
                 {success ? (
                     <div className="flex flex-col items-center justify-center text-green-700 py-8">
