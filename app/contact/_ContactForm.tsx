@@ -4,10 +4,8 @@ import { useState } from "react"
 import { CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import PocketBase from "pocketbase"
 import { useMetaPixelTracking } from '@/lib/meta-pixel'
-
-const pb = new PocketBase("https://primoriomarketplace.pockethost.io")
+import { submitContactForm } from './actions'
 
 export default function ContactForm() {
     const { trackContactFormLead } = useMetaPixelTracking()
@@ -24,22 +22,28 @@ export default function ContactForm() {
         e.preventDefault()
         setLoading(true)
         setError("")
+
         try {
-            await pb.collection("kontaktanfragen_allgemein").create({
-                name: form.name,
-                email: form.email,
-                telefon: form.phone,
-                nachricht: form.message,
-            })
+            const formData = new FormData()
+            formData.append('name', form.name)
+            formData.append('email', form.email)
+            formData.append('phone', form.phone)
+            formData.append('message', form.message)
 
-            // Track successful form submission with Meta Pixel
-            trackContactFormLead({
-                email: form.email,
-                leadType: 'contact_form',
-                timestamp: new Date().toISOString()
-            })
+            const result = await submitContactForm(formData)
 
-            setSuccess(true)
+            if (result.success) {
+                // Track successful form submission with Meta Pixel
+                trackContactFormLead({
+                    email: form.email,
+                    leadType: 'contact_form',
+                    timestamp: new Date().toISOString()
+                })
+
+                setSuccess(true)
+            } else {
+                setError(result.error || "Fehler beim Senden. Bitte versuchen Sie es erneut.")
+            }
         } catch (err: any) {
             setError("Fehler beim Senden. Bitte versuchen Sie es erneut.")
         } finally {

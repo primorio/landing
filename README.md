@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Configuration
+
+For email notifications to work, you need to create a `.env.local` file in the root directory with the following SMTP configuration:
+
+```bash
+# SMTP Configuration for Email Notifications
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@example.com
+SMTP_PASS=your-app-password
+```
+
+**Note:** For Gmail, you'll need to use an App Password instead of your regular password. Enable 2FA on your Google account and generate an App Password at: https://support.google.com/accounts/answer/185833
+
 ## Getting Started
 
 First, run the development server:

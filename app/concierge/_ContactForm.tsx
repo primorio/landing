@@ -4,8 +4,8 @@ import { useState } from "react"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import PocketBase from "pocketbase"
 import { useMetaPixelTracking } from '@/lib/meta-pixel'
+import { submitConciergeForm } from './actions'
 
 export default function ContactForm() {
     const { trackConciergeFormLead } = useMetaPixelTracking()
@@ -19,7 +19,6 @@ export default function ContactForm() {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState("")
-    const pb = new PocketBase("https://primoriomarketplace.pockethost.io")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -29,23 +28,29 @@ export default function ContactForm() {
         e.preventDefault()
         setLoading(true)
         setError("")
+
         try {
-            await pb.collection("kontaktanfragen_concierge").create({
-                firma: form.firma,
-                ansprechpartner: form.ansprechpartner,
-                email: form.email,
-                telefon: form.telefon,
-                anzahl_einheiten: form.anzahl_einheiten,
-            })
+            const formData = new FormData()
+            formData.append('firma', form.firma)
+            formData.append('ansprechpartner', form.ansprechpartner)
+            formData.append('email', form.email)
+            formData.append('telefon', form.telefon)
+            formData.append('anzahl_einheiten', form.anzahl_einheiten)
 
-            // Track successful form submission with Meta Pixel
-            trackConciergeFormLead({
-                email: form.email,
-                leadType: 'concierge_form',
-                timestamp: new Date().toISOString()
-            })
+            const result = await submitConciergeForm(formData)
 
-            setSuccess(true)
+            if (result.success) {
+                // Track successful form submission with Meta Pixel
+                trackConciergeFormLead({
+                    email: form.email,
+                    leadType: 'concierge_form',
+                    timestamp: new Date().toISOString()
+                })
+
+                setSuccess(true)
+            } else {
+                setError(result.error || "Fehler beim Senden. Bitte versuchen Sie es erneut.")
+            }
         } catch (err: any) {
             setError("Fehler beim Senden. Bitte versuchen Sie es erneut.")
         } finally {
