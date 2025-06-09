@@ -960,15 +960,14 @@ export default function ConciergePage() {
                                             Schnelle Umsetzung
                                         </li>
                                     </ul>
-                                    <Link href="mailto:info@primorio.de">
-                                        <Button
-                                            size="lg"
-                                            className="w-full bg-white text-teal-700 hover:bg-gray-100 font-bold transition-all duration-300 hover:scale-105"
-                                        >
-                                            <Mail className="w-5 h-5 mr-2" />
-                                            Angebot anfordern
-                                        </Button>
-                                    </Link>
+                                    <ScrollToButton
+                                        targetId="contact-form"
+                                        size="lg"
+                                        className="w-full bg-white text-teal-700 hover:bg-gray-100 font-bold transition-all duration-300 hover:scale-105"
+                                    >
+                                        <Mail className="w-5 h-5 mr-2" />
+                                        Angebot anfordern
+                                    </ScrollToButton>
                                 </div>
                             </div>
 
