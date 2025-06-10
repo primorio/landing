@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export default function ConciergePage() {
-    const demoNumber = "+49 30 52014530";
+    const demoNumber = "+49 30 21927725";
 
     return (
         <div className="min-h-screen bg-white flex flex-col">
