@@ -32,12 +32,12 @@ export default function NavBar({ logo, contactContent }: NavBarProps) {
 
                     {/* Desktop Navigation Links */}
                     <nav className="hidden md:flex items-center gap-6">
-                        <Link
+                        {/* <Link
                             href="/concierge"
                             className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
                         >
-                            Primorio Concierge
-                        </Link>
+                            Concierge
+                        </Link> */}
                         <Link
                             href="/jobs"
                             className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
@@ -76,13 +76,13 @@ export default function NavBar({ logo, contactContent }: NavBarProps) {
             {mobileMenuOpen && (
                 <div className="md:hidden border-t border-gray-100 bg-white">
                     <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
-                        <Link
+                        {/* <Link
                             href="/concierge"
                             className="text-gray-600 hover:text-gray-900 font-medium transition-colors py-2"
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            Primorio Concierge
-                        </Link>
+                            Concierge
+                        </Link> */}
                         <Link
                             href="/jobs"
                             className="text-gray-600 hover:text-gray-900 font-medium transition-colors py-2"
