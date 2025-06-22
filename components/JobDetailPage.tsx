@@ -25,6 +25,7 @@ import { useState } from "react";
 import Link from "next/link";
 import NavBar from "@/components/ui/NavBar";
 import Footer from "@/components/ui/Footer";
+import pb from "@/lib/pocketbase";
 
 interface Job {
     id: string;
@@ -52,17 +53,38 @@ function ApplicationDialog({ job, trigger }: ApplicationDialogProps) {
         cv: null as File | null,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [open, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
 
+        try {
+            await pb.collection("job_applications").create({
+                name: formData.name,
+                email: formData.email,
+                telefon: formData.phone,
+                cv: formData.cv,
+                jobId: job.id,
+            });
+        } catch (error) {
+            console.error("Fehler beim Senden der Bewerbung:", error);
+            alert(
+                "Fehler beim Senden der Bewerbung. Bitte versuchen Sie es erneut."
+            );
+            setIsSubmitting(false);
+            return;
+        }
+
         // Simulate form submission
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        alert(
-            "Bewerbung erfolgreich eingereicht! Wir melden uns bald bei Ihnen."
-        );
+        // alert(
+        //     "Bewerbung erfolgreich eingereicht! Wir melden uns bald bei Ihnen."
+        // );
+        setSubmitted(true);
         setIsSubmitting(false);
         setFormData({
             name: "",
@@ -73,92 +95,119 @@ function ApplicationDialog({ job, trigger }: ApplicationDialogProps) {
     };
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                    <DialogTitle className="text-xl">
-                        Bewerbung einreichen
-                    </DialogTitle>
-                    <DialogDescription className="text-gray-600">
-                        {job.title}
-                    </DialogDescription>
-                </DialogHeader>
-                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="name">Vollständiger Name *</Label>
-                        <Input
-                            id="name"
-                            type="text"
-                            value={formData.name}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    name: e.target.value,
-                                })
-                            }
-                            required
-                            placeholder="Ihr vollständiger Name"
-                        />
+                {submitted ? (
+                    <div className="text-center space-y-4">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                            Bewerbung erfolgreich eingereicht!
+                        </h2>
+                        <p className="text-gray-700">
+                            Vielen Dank für Ihre Bewerbung. Wir werden uns bald
+                            bei Ihnen melden.
+                        </p>
+                        <Button
+                            onClick={() => {
+                                setSubmitted(false);
+                                setIsOpen(false);
+                            }}
+                            className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800"
+                        >
+                            Schließen
+                        </Button>
                     </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="email">E-Mail-Adresse *</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    email: e.target.value,
-                                })
-                            }
-                            required
-                            placeholder="ihre.email@beispiel.de"
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="phone">Telefonnummer *</Label>
-                        <Input
-                            id="phone"
-                            type="tel"
-                            value={formData.phone}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    phone: e.target.value,
-                                })
-                            }
-                            required
-                            placeholder="+49 123 456789"
-                        />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="cv">Lebenslauf (PDF) *</Label>
-                        <Input
-                            id="cv"
-                            type="file"
-                            accept=".pdf"
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    cv: e.target.files?.[0] || null,
-                                })
-                            }
-                            required
-                            className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
-                        />
-                    </div>
-                    <Button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting
-                            ? "Wird eingereicht..."
-                            : "Bewerbung einreichen"}
-                    </Button>
-                </form>
+                ) : (
+                    <>
+                        <DialogHeader>
+                            <DialogTitle className="text-xl">
+                                Bewerbung einreichen
+                            </DialogTitle>
+                            <DialogDescription className="text-gray-600">
+                                {job.title}
+                            </DialogDescription>
+                        </DialogHeader>
+                        <form
+                            onSubmit={handleSubmit}
+                            className="space-y-4 mt-4"
+                        >
+                            <div className="space-y-2">
+                                <Label htmlFor="name">
+                                    Vollständiger Name *
+                                </Label>
+                                <Input
+                                    id="name"
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            name: e.target.value,
+                                        })
+                                    }
+                                    required
+                                    placeholder="Ihr vollständiger Name"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="email">E-Mail-Adresse *</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            email: e.target.value,
+                                        })
+                                    }
+                                    required
+                                    placeholder="ihre.email@beispiel.de"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="phone">Telefonnummer</Label>
+                                <Input
+                                    id="phone"
+                                    type="tel"
+                                    value={formData.phone}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            phone: e.target.value,
+                                        })
+                                    }
+                                    placeholder="+49 123 456789"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="cv">Lebenslauf (PDF) *</Label>
+                                <Input
+                                    id="cv"
+                                    type="file"
+                                    accept=".pdf"
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            cv: e.target.files?.[0] || null,
+                                        })
+                                    }
+                                    required
+                                    className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
+                                />
+                            </div>
+                            <Button
+                                type="submit"
+                                className="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting
+                                    ? "Wird eingereicht..."
+                                    : "Bewerbung einreichen"}
+                            </Button>
+                        </form>
+                    </>
+                )}
             </DialogContent>
         </Dialog>
     );

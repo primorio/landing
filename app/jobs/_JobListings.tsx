@@ -13,8 +13,8 @@ function JobCard({ job }: JobCardProps) {
         switch (jobId) {
             case "werkstudent-dev":
                 return "/jobs/werkstudent-dev";
-            case "account-manager":
-                return "/jobs/account-manager";
+            // case "account-manager":
+            //     return "/jobs/account-manager";
             default:
                 return "/jobs";
         }
