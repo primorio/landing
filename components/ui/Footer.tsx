@@ -7,7 +7,10 @@ export default function Footer() {
             <div className="container mx-auto px-4">
                 <div className="grid md:grid-cols-3 gap-8">
                     <div>
-                        <Link href="/" className="flex items-center space-x-3 mb-4">
+                        <Link
+                            href="/"
+                            className="flex items-center space-x-3 mb-4"
+                        >
                             <Logo
                                 width={32}
                                 height={32}
@@ -17,34 +20,58 @@ export default function Footer() {
                                 isDark={true}
                             />
                         </Link>
-                        <p className="text-gray-400 text-sm">Innovative Lösungen für die Immobilienwirtschaft.</p>
+                        <p className="text-gray-400 text-sm">
+                            Innovative Lösungen für die Immobilienwirtschaft.
+                        </p>
                     </div>
                     <div>
                         <h4 className="font-semibold mb-4">Produkte</h4>
                         <ul className="space-y-2 text-sm text-gray-400">
                             <li>
-                                <Link href="/concierge" className="hover:text-white transition-colors">
+                                <Link
+                                    href="/concierge"
+                                    className="hover:text-white transition-colors"
+                                >
                                     Primorio Concierge
                                 </Link>
                             </li>
-                            <li className="text-gray-600">Weitere Produkte folgen</li>
+                            <li className="text-gray-600">
+                                Weitere Produkte folgen
+                            </li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-semibold mb-4">Rechtliches</h4>
+                        <h4 className="font-semibold mb-4">Unternehmen</h4>
                         <ul className="space-y-2 text-sm text-gray-400">
                             <li>
-                                <Link href="/contact" className="hover:text-white transition-colors">
+                                <Link
+                                    href="/jobs"
+                                    className="hover:text-white transition-colors"
+                                >
+                                    Karriere
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/contact"
+                                    className="hover:text-white transition-colors"
+                                >
                                     Kontakt
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/legal" className="hover:text-white transition-colors">
+                                <Link
+                                    href="/legal"
+                                    className="hover:text-white transition-colors"
+                                >
                                     Impressum
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/privacy" className="hover:text-white transition-colors">
+                                <Link
+                                    href="/privacy"
+                                    className="hover:text-white transition-colors"
+                                >
                                     Datenschutz
                                 </Link>
                             </li>
@@ -52,9 +79,12 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-                    <p>&copy; {new Date().getFullYear()} Primorio. Alle Rechte vorbehalten.</p>
+                    <p>
+                        &copy; {new Date().getFullYear()} Primorio. Alle Rechte
+                        vorbehalten.
+                    </p>
                 </div>
             </div>
         </footer>
     );
-} 
+}

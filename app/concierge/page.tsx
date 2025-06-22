@@ -70,7 +70,7 @@ export default function ConciergePage() {
                         </div>
                     </Link>
                 }
-                rightContent={
+                contactContent={
                     <div className="flex items-center space-x-4">
                         <ScrollToButton
                             targetId="contact-form"
