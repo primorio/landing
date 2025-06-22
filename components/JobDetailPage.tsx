@@ -193,7 +193,7 @@ function ApplicationDialog({ job, trigger }: ApplicationDialogProps) {
                                         })
                                     }
                                     required
-                                    className="file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100"
+                                    className="file:mr-4 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 file:leading-[25px] file:align-center"
                                 />
                             </div>
                             <Button
