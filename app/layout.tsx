@@ -14,9 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL(`https://primorio.de`),
     title: "Primorio - Innovative Lösungen für die Immobilienwirtschaft",
     icons: {
         icon: "/favicon.ico",
+    },
+    alternates: {
+        canonical: "./",
     },
 };
 
