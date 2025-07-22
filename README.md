@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Environment Configuration
 
-For email notifications to work, you need to create a `.env.local` file in the root directory with the following SMTP configuration:
+For email notifications and Strapi blog integration to work, you need to create a `.env.local` file in the root directory with the following configuration:
 
 ```bash
 # SMTP Configuration for Email Notifications
@@ -10,9 +10,26 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@example.com
 SMTP_PASS=your-app-password
+
+# Strapi Configuration for Blog
+NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+STRAPI_API_TOKEN=your-strapi-api-token
 ```
 
 **Note:** For Gmail, you'll need to use an App Password instead of your regular password. Enable 2FA on your Google account and generate an App Password at: https://support.google.com/accounts/answer/185833
+
+**Strapi Setup:**
+
+-   Set `NEXT_PUBLIC_STRAPI_URL` to your Strapi instance URL (e.g., `https://your-strapi-instance.com`)
+-   Set `STRAPI_API_TOKEN` to a read-only API token generated in your Strapi admin panel
+-   Make sure your Strapi instance has an "article" collection type with the following fields:
+    -   title (Text)
+    -   slug (UID based on title)
+    -   content (Rich Text - Blocks)
+    -   excerpt (Text, optional)
+    -   featuredImage (Media, optional)
+    -   author (Relation to User, optional)
+    -   categories (Relation to Category collection, optional)
 
 ## Getting Started
 
@@ -38,8 +55,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 

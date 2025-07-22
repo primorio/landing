@@ -38,6 +38,12 @@ export default function NavBar({ logo, contactContent }: NavBarProps) {
                         >
                             Concierge
                         </Link> */}
+                        {/* <Link
+                            href="/blog"
+                            className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+                        >
+                            Blog
+                        </Link> */}
                         <Link
                             href="/jobs"
                             className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
@@ -82,6 +88,13 @@ export default function NavBar({ logo, contactContent }: NavBarProps) {
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Concierge
+                        </Link> */}
+                        {/* <Link
+                            href="/blog"
+                            className="text-gray-600 hover:text-gray-900 font-medium transition-colors py-2"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            Blog
                         </Link> */}
                         <Link
                             href="/jobs"
