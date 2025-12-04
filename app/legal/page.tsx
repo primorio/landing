@@ -64,10 +64,6 @@ export default function ImpressumPage() {
                                 Umsatzsteuergesetz: DE450315194
                             </p>
                             <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                                Steuernummer:
-                            </h3>
-                            <p className="mb-6">29/479/30829</p>
-                            <h3 className="text-xl font-semibold text-gray-900 mb-3">
                                 Verantwortlich für den Inhalt nach § 55 Abs. 2
                                 RStV:
                             </h3>
